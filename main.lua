@@ -1,22 +1,24 @@
-local x = 120
-local dir = 1
+local hero_atlas
+local hero_sprite
+
+local angle = 0
+
+function love.load()
+  love.graphics.setDefaultFilter("nearest", "nearest")
+  hero_atlas = love.graphics.newImage("assets/gfx/hero.png")
+  hero_sprite = love.graphics.newQuad(32, 16, 16, 16, hero_atlas:getDimensions())
+end
 
 function love.update(dt)
-  -- pauses updating if dt is very high
-  if dt > 0.040 then return end
+  if dt > 0.035 then return end -- lag guard thingie again
 
-  if x < 120 then
-    dir = 1
-  elseif x > 400 then
-    dir = -1
-  end
-  x = x + dir * 200 * dt
+  angle = angle + 27.5 * dt
 end
 
 function love.draw()
-  -- can't you set the color on individual draw function calls?
-  love.graphics.setColor(1, 1, 1)
-  love.graphics.print("hello canvas", 10, 100)
-  love.graphics.setColor(0.5, 0.25, 1)
-  love.graphics.rectangle("fill", x, 100, 100, 50)
+  -- last two arguments are "origin offset"
+  -- setting these to 8 (half of the sprite's height and width)
+  -- means that it will rotate from its center
+  -- rather than the upper left corner, as it would by default
+  love.graphics.draw(hero_atlas, hero_sprite, 320, 180, math.rad(angle), 4, 4, 8, 8)
 end
