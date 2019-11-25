@@ -15,7 +15,7 @@ function love.load()
 end
 
 function love.update(dt)
-  if dt > 0.035 then return end -- lag guard thingie again
+  if dt > 0.035 then return end
 
   anim_timer = anim_timer - dt
   
@@ -29,9 +29,6 @@ function love.update(dt)
 end
 
 function love.draw()
-  -- last two arguments are "origin offset"
-  -- setting these to 8 (half of the sprite's height and width)
-  -- means that it will rotate from its center
-  -- rather than the upper left corner, as it would by default
+  love.graphics.clear(.25, .25, 1)
   love.graphics.draw(hero_atlas, hero_sprite, 320, 180, 0, 10, 10, 8, 8)
 end
