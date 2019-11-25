@@ -1,3 +1,5 @@
+local Animation = require("animation")
+
 local hero_atlas
 local hero_sprite
 
@@ -8,24 +10,18 @@ local frame = 1
 local num_frames = 6
 local xoffset
 
+local a = Animation(16, 32, 16, 16, 6, 6, 12)
+
 function love.load()
   love.graphics.setDefaultFilter("nearest", "nearest")
   hero_atlas = love.graphics.newImage("assets/gfx/hero.png")
-  hero_sprite = love.graphics.newQuad(16, 32, 16, 16, hero_atlas:getDimensions())
+  hero_sprite = love.graphics.newQuad(16, 32, 16, 16, hero_atlas:getDimensions())  
 end
 
 function love.update(dt)
   if dt > 0.035 then return end
-
-  anim_timer = anim_timer - dt
   
-  if anim_timer <= 0 then
-    anim_timer = 1 / fps
-    frame = frame + 1
-    if frame > num_frames then frame = 1 end
-    xoffset = 16 * frame
-    hero_sprite:setViewport(xoffset, 32, 16, 16)
-  end
+  a:update(dt, hero_sprite)
 end
 
 function love.draw()
