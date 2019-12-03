@@ -18,7 +18,13 @@ function Animation:reset()
   self.frame = 1
 end
 
+function Animation:set(quad)
+  quad:setViewport(self.offset.x, self.offset.y, self.size.x, self.size.y)
+end
+
 function Animation:update(dt, quad)
+  if self.num_frames <= 1 then return end
+  
   self.timer = self.timer - dt
   
   if self.timer <= 0 then
@@ -27,7 +33,7 @@ function Animation:update(dt, quad)
     if self.frame > self.num_frames then
       self.frame = 1
     end
-    self.offset.x = self.start_offset.x + (self.size.x * (self.frame - 1))
+    self.offset.x = self.start_offset.x + (self.size.x * ((self.frame - 1) % (self.num_columns)))
     self.offset.y = self.start_offset.y + (self.size.y * math.floor((self.frame - 1) / self.num_columns))
     quad:setViewport(self.offset.x, self.offset.y, self.size.x, self.size.y)
   end
