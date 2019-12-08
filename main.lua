@@ -44,5 +44,12 @@ function love.keypressed(key)
     love.audio.stop(snd)
     love.audio.play(snd)
     spr:animate("punch")
+  elseif key == "a" then
+  elseif key == "d" then
+    spr:flip_h(false)
+  elseif key == "w" then
+    spr:flip_v(true)
+  elseif key == "s" then
+    spr:flip_v(false)
   end
 end
