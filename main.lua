@@ -5,7 +5,7 @@ local hero_atlas
 
 local spr
 local idle = Animation(16, 16, 16, 16, 4, 4, 6)
-local walk = Animation(16, 32, 16, 16, 6, 6, 12)
+local walk = Animation(16, 32, 16, 16, {1, 2, 3, 4, 5, 6}, 6, 12)
 local swim = Animation(16, 64, 16, 16, 6, 6, 12)
 local punch= Animation(16, 80, 16, 16, 3, 3, 8, false)
 local snd
@@ -19,7 +19,7 @@ function love.load()
   spr:add_animation("walk", walk)
   spr:add_animation("swim", swim)
   spr:add_animation("punch", punch)
-  spr:animate("idle")
+  spr:animate("walk")
   
   snd = love.audio.newSource("assets/sfx/hit01.wav", "static")
 end
@@ -45,6 +45,7 @@ function love.keypressed(key)
     love.audio.play(snd)
     spr:animate("punch")
   elseif key == "a" then
+    spr:flip_h(true)
   elseif key == "d" then
     spr:flip_h(false)
   elseif key == "w" then
