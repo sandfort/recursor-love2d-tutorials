@@ -1,5 +1,6 @@
 local Animation = require("animation")
 local Sprite = require("sprite")
+local Keyboard = require("keyboard")
 
 local hero_atlas
 
@@ -11,6 +12,7 @@ local punch= Animation(16, 80, 16, 16, 3, 3, 8, false)
 local snd
 
 function love.load()
+  Keyboard:hook_love_events()
   love.graphics.setDefaultFilter("nearest", "nearest")
   hero_atlas = love.graphics.newImage("assets/gfx/hero.png")
 
@@ -26,31 +28,24 @@ end
 
 function love.update(dt)
   if dt > 0.035 then return end
+  
+  if Keyboard:key_down("space") and spr.current_anim ~= "punch" then
+    love.audio.stop(snd)
+    love.audio.play(snd)
+    spr:animate("punch")
+  elseif Keyboard:key_down("escape") then
+    love.event.quit()
+  end
 
   if spr.current_anim == "punch" and spr:animation_finished() then
     spr:animate("idle")
   end
   
+  Keyboard:update(dt)
   spr:update(dt)
 end
 
 function love.draw()
   love.graphics.clear(.25, .25, 1)
   spr:draw()
-end
-
-function love.keypressed(key)
-  if key == "space" and spr.current_anim ~= "punch" then
-    love.audio.stop(snd)
-    love.audio.play(snd)
-    spr:animate("punch")
-  elseif key == "a" then
-    spr:flip_h(true)
-  elseif key == "d" then
-    spr:flip_h(false)
-  elseif key == "w" then
-    spr:flip_v(true)
-  elseif key == "s" then
-    spr:flip_v(false)
-  end
 end
