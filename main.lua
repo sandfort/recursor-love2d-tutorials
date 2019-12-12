@@ -1,6 +1,7 @@
 local Animation = require("animation")
 local Sprite = require("sprite")
 local Keyboard = require("keyboard")
+local Events = require("events")
 
 local hero_atlas
 
@@ -10,6 +11,7 @@ local walk = Animation(16, 32, 16, 16, {1, 2, 3, 4, 5, 6}, 6, 12)
 local swim = Animation(16, 64, 16, 16, 6, 6, 12)
 local punch= Animation(16, 80, 16, 16, 3, 3, 8, false)
 local snd
+local e
 
 function love.load()
   Keyboard:hook_love_events()
@@ -23,7 +25,15 @@ function love.load()
   spr:add_animation("punch", punch)
   spr:animate("walk")
   
+  e = Events()
+  e:add("on_space")
+  e:hook("on_space", on_space)
+  
   snd = love.audio.newSource("assets/sfx/hit01.wav", "static")
+end
+
+function on_space()
+  print("spaced!")
 end
 
 function love.update(dt)
@@ -33,6 +43,9 @@ function love.update(dt)
     love.audio.stop(snd)
     love.audio.play(snd)
     spr:animate("punch")
+    e:invoke("on_space")
+  elseif Keyboard:key_down("u") then
+    e:unhook("on_space", on_space)
   elseif Keyboard:key_down("escape") then
     love.event.quit()
   end
