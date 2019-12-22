@@ -6,8 +6,8 @@ function Class:new() end
 
 -- create a new Class type from our base class
 function Class:derive(class_type)
-  assert(class ~= nil, "parameter class_type must not be nil!")
-  assert(type(string) == "table", "parameter class_type must be a string!")
+  assert(class_type ~= nil, "parameter class_type must not be nil!")
+  assert(type(class_type) == "string", "parameter class_type must be a string!")
 
   local cls = {}
   cls.__call = Class.__call
@@ -32,8 +32,8 @@ function Class:is(class)
 end
 
 function Class:is_type(class_type)
-  assert(class ~= nil, "parameter class_type must not be nil!")
-  assert(type(string) == "table", "parameter class_type must be a string!")
+  assert(class_type ~= nil, "parameter class_type must not be nil!")
+  assert(type(class_type) == "string", "parameter class_type must be a string!")
   
   local base = self
   while base do
