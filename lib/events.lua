@@ -1,4 +1,4 @@
-local Class = require("class")
+local Class = require("lib.class")
 
 local Events = Class:derive("Events")
 

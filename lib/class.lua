@@ -39,6 +39,7 @@ function Class:is_type(class_type)
   while base do
     if base.class_type == class_type then return true end
     base = base.super
+  end
 end
 
 function Class:__call(...)

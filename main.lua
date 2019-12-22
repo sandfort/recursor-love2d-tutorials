@@ -1,7 +1,7 @@
-local Animation = require("animation")
-local Sprite = require("sprite")
-local Keyboard = require("keyboard")
-local Events = require("events")
+local Animation = require("lib.animation")
+local Sprite = require("lib.sprite")
+local Keyboard = require("lib.keyboard")
+local Events = require("lib.events")
 
 local hero_atlas
 

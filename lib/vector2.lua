@@ -1,4 +1,4 @@
-local Class = require("class")
+local Class = require("lib.class")
 local Vector2 = Class:derive("Vector2")
 
 function Vector2:new(x, y)

@@ -1,6 +1,6 @@
-local Class = require("class")
+local Class = require("lib.class")
 local Animation = Class:derive("Animation")
-local Vector2 = require("vector2")
+local Vector2 = require("lib.vector2")
 
 function Animation:new(xoff, yoff, w, h, frames, ncols, fps, loop)
   self.fps = fps

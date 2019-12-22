@@ -1,6 +1,6 @@
-local Class = require("class")
-local Animation = require("animation")
-local Vector2 = require("vector2")
+local Class = require("lib.class")
+local Animation = require("lib.animation")
+local Vector2 = require("lib.vector2")
 
 local Sprite = Class:derive("Sprite")
 
