@@ -4,7 +4,7 @@ local Vector2 = require("lib.vector2")
 
 local Sprite = Class:derive("Sprite")
 
-function Sprite:new(atlas, w, h, x, y, sx, sy, angle)
+function Sprite:new(atlas, x, y, w, h, sx, sy, angle)
   self.w = w
   self.h = h
   self.flip = Vector2(1, 1)

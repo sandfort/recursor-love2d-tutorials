@@ -9,14 +9,15 @@ local scene_mgr
 local gpm = GamePadManager({"assets/gamecontrollerdb.txt"})
 
 function love.load()
-  Keyboard:hook_love_events()
   love.graphics.setDefaultFilter("nearest", "nearest")
+  local font = love.graphics.newFont("assets/Pixeled.ttf", 16)
+  love.graphics.setFont(font)
   
   gpm.events:hook("controller_added", on_controller_added)
   gpm.events:hook("controller_removed", on_controller_removed)
   
   scene_mgr = SceneManager("scenes", {"mainmenu", "test"})
-  scene_mgr:switch("test")
+  scene_mgr:switch("mainmenu")
 end
 
 function on_controller_added(joy_id)
@@ -25,10 +26,6 @@ end
 
 function on_controller_removed(joy_id)
   print("controller "..joy_id.." removed")
-end
-
-function on_space()
-  print("spaced!")
 end
 
 function love.update(dt)
